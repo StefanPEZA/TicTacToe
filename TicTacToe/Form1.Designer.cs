@@ -38,7 +38,11 @@
             this.ResetButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.ScorePanel = new System.Windows.Forms.Panel();
+            this.nameChange1 = new System.Windows.Forms.TextBox();
+            this.nameChange2 = new System.Windows.Forms.TextBox();
+            this.Player2Char = new System.Windows.Forms.Label();
             this.Player2ScoreText = new System.Windows.Forms.Label();
+            this.Player1Char = new System.Windows.Forms.Label();
             this.DrawScoreText = new System.Windows.Forms.Label();
             this.Player1ScoreText = new System.Windows.Forms.Label();
             this.DrawScore = new System.Windows.Forms.Label();
@@ -104,7 +108,7 @@
             "Hard"});
             this.DifficultyChosen.Location = new System.Drawing.Point(416, 232);
             this.DifficultyChosen.Name = "DifficultyChosen";
-            this.DifficultyChosen.Size = new System.Drawing.Size(272, 32);
+            this.DifficultyChosen.Size = new System.Drawing.Size(275, 32);
             this.DifficultyChosen.TabIndex = 19;
             // 
             // label3
@@ -185,7 +189,11 @@
             // ScorePanel
             // 
             this.ScorePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.ScorePanel.Controls.Add(this.nameChange1);
+            this.ScorePanel.Controls.Add(this.nameChange2);
+            this.ScorePanel.Controls.Add(this.Player2Char);
             this.ScorePanel.Controls.Add(this.Player2ScoreText);
+            this.ScorePanel.Controls.Add(this.Player1Char);
             this.ScorePanel.Controls.Add(this.DrawScoreText);
             this.ScorePanel.Controls.Add(this.Player1ScoreText);
             this.ScorePanel.Controls.Add(this.DrawScore);
@@ -197,6 +205,62 @@
             this.ScorePanel.Size = new System.Drawing.Size(392, 118);
             this.ScorePanel.TabIndex = 13;
             // 
+            // nameChange1
+            // 
+            this.nameChange1.AutoCompleteCustomSource.AddRange(new string[] {
+            "Player1"});
+            this.nameChange1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.nameChange1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.nameChange1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.nameChange1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.nameChange1.Font = new System.Drawing.Font("Arial Black", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.nameChange1.ForeColor = System.Drawing.Color.White;
+            this.nameChange1.Location = new System.Drawing.Point(38, 20);
+            this.nameChange1.Margin = new System.Windows.Forms.Padding(0);
+            this.nameChange1.MaxLength = 16;
+            this.nameChange1.Name = "nameChange1";
+            this.nameChange1.Size = new System.Drawing.Size(289, 26);
+            this.nameChange1.TabIndex = 20;
+            this.nameChange1.Visible = false;
+            this.nameChange1.WordWrap = false;
+            this.nameChange1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NameChange1_KeyDown);
+            this.nameChange1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nameChange1_KeyPress);
+            // 
+            // nameChange2
+            // 
+            this.nameChange2.AutoCompleteCustomSource.AddRange(new string[] {
+            "Player2"});
+            this.nameChange2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.nameChange2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.nameChange2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.nameChange2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.nameChange2.Font = new System.Drawing.Font("Arial Black", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.nameChange2.ForeColor = System.Drawing.Color.White;
+            this.nameChange2.Location = new System.Drawing.Point(38, 52);
+            this.nameChange2.Margin = new System.Windows.Forms.Padding(0);
+            this.nameChange2.MaxLength = 16;
+            this.nameChange2.Name = "nameChange2";
+            this.nameChange2.Size = new System.Drawing.Size(289, 26);
+            this.nameChange2.TabIndex = 21;
+            this.nameChange2.Visible = false;
+            this.nameChange2.WordWrap = false;
+            this.nameChange2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NameChange2_KeyDown);
+            this.nameChange2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nameChange1_KeyPress);
+            // 
+            // Player2Char
+            // 
+            this.Player2Char.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.Player2Char.Font = new System.Drawing.Font("Arial Black", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.Player2Char.ForeColor = System.Drawing.Color.White;
+            this.Player2Char.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.Player2Char.Location = new System.Drawing.Point(1, 52);
+            this.Player2Char.Margin = new System.Windows.Forms.Padding(0);
+            this.Player2Char.Name = "Player2Char";
+            this.Player2Char.Size = new System.Drawing.Size(48, 26);
+            this.Player2Char.TabIndex = 21;
+            this.Player2Char.Text = "(O)";
+            this.Player2Char.Visible = false;
+            // 
             // Player2ScoreText
             // 
             this.Player2ScoreText.AutoSize = true;
@@ -207,9 +271,24 @@
             this.Player2ScoreText.Location = new System.Drawing.Point(1, 52);
             this.Player2ScoreText.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.Player2ScoreText.Name = "Player2ScoreText";
-            this.Player2ScoreText.Size = new System.Drawing.Size(104, 26);
+            this.Player2ScoreText.Size = new System.Drawing.Size(133, 26);
             this.Player2ScoreText.TabIndex = 20;
-            this.Player2ScoreText.Text = "Player2 >";
+            this.Player2ScoreText.Text = "(O)Player2 >";
+            this.Player2ScoreText.Click += new System.EventHandler(this.Player2ScoreText_Click);
+            // 
+            // Player1Char
+            // 
+            this.Player1Char.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.Player1Char.Font = new System.Drawing.Font("Arial Black", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.Player1Char.ForeColor = System.Drawing.Color.White;
+            this.Player1Char.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.Player1Char.Location = new System.Drawing.Point(1, 20);
+            this.Player1Char.Margin = new System.Windows.Forms.Padding(0);
+            this.Player1Char.Name = "Player1Char";
+            this.Player1Char.Size = new System.Drawing.Size(48, 26);
+            this.Player1Char.TabIndex = 20;
+            this.Player1Char.Text = "(X)";
+            this.Player1Char.Visible = false;
             // 
             // DrawScoreText
             // 
@@ -235,9 +314,10 @@
             this.Player1ScoreText.Location = new System.Drawing.Point(1, 20);
             this.Player1ScoreText.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.Player1ScoreText.Name = "Player1ScoreText";
-            this.Player1ScoreText.Size = new System.Drawing.Size(104, 26);
+            this.Player1ScoreText.Size = new System.Drawing.Size(132, 26);
             this.Player1ScoreText.TabIndex = 18;
-            this.Player1ScoreText.Text = "Player1 >";
+            this.Player1ScoreText.Text = "(X)Player1 >";
+            this.Player1ScoreText.Click += new System.EventHandler(this.Player1ScoreText_Click);
             // 
             // DrawScore
             // 
@@ -518,7 +598,7 @@
             // 
             // UpdateTimer
             // 
-            this.UpdateTimer.Interval = 50;
+            this.UpdateTimer.Interval = 20;
             this.UpdateTimer.Tick += new System.EventHandler(this.UpdateTick);
             // 
             // Form1
@@ -530,6 +610,7 @@
             this.Controls.Add(this.MainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -572,6 +653,10 @@
         private System.Windows.Forms.CheckBox PlayWithAI;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox DifficultyChosen;
+        private System.Windows.Forms.TextBox nameChange2;
+        private System.Windows.Forms.TextBox nameChange1;
+        private System.Windows.Forms.Label Player2Char;
+        private System.Windows.Forms.Label Player1Char;
     }
 }
 

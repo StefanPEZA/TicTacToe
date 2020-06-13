@@ -11,6 +11,8 @@ namespace TicTacToe
         public string name = "";
         public string character = "";
         private static Form1 mainGame;
+        private static readonly Random rand = new Random(DateTime.Now.Millisecond);
+
         public Player(string _name, string _character, Form1 _mainGame)
         {
             name = _name;
@@ -20,7 +22,6 @@ namespace TicTacToe
 
         private static Button ChoseRandom()
         {
-            Random rand = new Random();
             Button chosen = mainGame.remainingButtons[rand.Next(0, mainGame.remainingButtons.Count())];
             return chosen;
         }
@@ -76,7 +77,6 @@ namespace TicTacToe
             }
             if (corners.Count > 0)
             {
-                Random rand = new Random();
                 return corners[rand.Next(0, corners.Count())];
             }
             return null;
@@ -94,7 +94,6 @@ namespace TicTacToe
             }
             if (edges.Count > 0)
             {
-                Random rand = new Random();
                 return edges[rand.Next(0, edges.Count())];
             }
             return null;

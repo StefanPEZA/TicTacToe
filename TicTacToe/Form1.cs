@@ -40,6 +40,7 @@ namespace TicTacToe
             player2 = new Player("Player2", "O", this);
             DifficultyChosen.SelectedIndex = 0;
             UpdateScoreTable();
+            UpdateTimer.Enabled = true;
         }
 
         public void UpdateScoreTable()
@@ -88,11 +89,13 @@ namespace TicTacToe
                         btn.FlatAppearance.MouseDownBackColor = Color.White;
                         btn.FlatAppearance.MouseOverBackColor = Color.White;
                     }
+                    btn.Cursor = Cursors.Arrow;
                 }
                 else
                 {
                     btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(224,224,224);
                     btn.FlatAppearance.MouseDownBackColor = Color.Gray;
+                    btn.Cursor = Cursors.Hand;
                 }
             }
         }
@@ -202,7 +205,6 @@ namespace TicTacToe
             DialogResult result = MessageBox.Show("Are you sure you want to reset the game? All progress will be deleted!", "Are you sure?", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                UpdateTimer.Enabled = false;
                 ResetButton.Enabled = false;
                 resumeButton.Enabled = false;
                 playButton.Text = "Play";
@@ -244,7 +246,6 @@ namespace TicTacToe
                 isPlayerOneTurn = isPlayerOneFirst;
                 resumeButton.Enabled = true;
                 EnableDisableButtons(true);
-                UpdateTimer.Enabled = true;
                 PlayWithAI.Enabled = false;
                 label3.Enabled = false;
                 DifficultyChosen.Enabled = false;
@@ -262,7 +263,6 @@ namespace TicTacToe
                     resumeButton.Enabled = true;
                     EnableDisableButtons(true);
                 }
-                UpdateTimer.Enabled = true;
                 PlayWithAI.Enabled = false;
                 label3.Enabled = false;
                 DifficultyChosen.Enabled = false;
@@ -277,6 +277,7 @@ namespace TicTacToe
             {
                 AiMove();
             }
+
         }
 
         private void PlayWithAI_CheckedChanged(object sender, EventArgs e)
@@ -298,6 +299,88 @@ namespace TicTacToe
                 UpdateScoreTable();
             }
         }
+
+        #region Name changer functionality...
+        private void Player1ScoreText_Click(object sender, EventArgs e)
+        {
+            nameChange2.Enabled = false;
+            nameChange2.Visible = false;
+            Player2Char.Visible = false;
+            nameChange1.Text = player1.name;
+            nameChange1.Enabled = true;
+            nameChange1.Visible = true;
+            Player1Char.Text = "(" + player1.character + ")";
+            Player1Char.Visible = true;
+            nameChange1.Focus();
+            nameChange1.SelectionLength = 0;
+            nameChange1.SelectionStart = nameChange1.Text.Length;
+        }
+
+        private void NameChange1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (nameChange1.Focused)
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    if (nameChange1.Text.Length >= 3)
+                    {
+                        player1.name = nameChange1.Text;
+                        nameChange1.Enabled = false;
+                        nameChange1.Visible = false;
+                        Player1Char.Visible = false;
+                        UpdateScoreTable();
+                        e.Handled = true;
+                        e.SuppressKeyPress = true;
+                    }
+                }
+            }
+        }
+
+        private void Player2ScoreText_Click(object sender, EventArgs e)
+        {
+            if (playerTwoIsAI)
+                return;
+            nameChange1.Enabled = false;
+            nameChange1.Visible = false;
+            Player1Char.Visible = false;
+            nameChange2.Text = player2.name;
+            nameChange2.Enabled = true;
+            nameChange2.Visible = true;
+            Player2Char.Text = "(" + player2.character + ")";
+            Player2Char.Visible = true;
+            nameChange2.Focus();
+            nameChange2.SelectionLength = 0;
+            nameChange2.SelectionStart = nameChange2.Text.Length;
+        }
+
+        private void NameChange2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (nameChange2.Focused)
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    if (nameChange2.Text.Length >= 3)
+                    {
+                        player2.name = nameChange2.Text;
+                        nameChange2.Enabled = false;
+                        nameChange2.Visible = false;
+                        Player2Char.Visible = false;
+                        UpdateScoreTable();
+                    }
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
+            }
+        }
+        
+        private void nameChange1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(e.KeyChar >= 'a' && e.KeyChar <= 'z') && !(e.KeyChar >= 'A' && e.KeyChar <= 'Z') && !(e.KeyChar >= '0' && e.KeyChar <= '9') && !(e.KeyChar == '_') && !(e.KeyChar == '\b'))
+            {
+                e.Handled = true;
+            }
+        }
+        #endregion
 
         private void ResumeButton_Clicked(object sender, EventArgs e)
         {
@@ -341,6 +424,7 @@ namespace TicTacToe
 
         private void AiMove()
         {
+            EnableDisableButtons(false);
             int difficulty = 0;
             if (DifficultyChosen.SelectedItem.ToString() == "Noob")
             {
@@ -361,7 +445,8 @@ namespace TicTacToe
 
             Button chosen = Player.PerformAiMove(difficulty);
             System.Threading.Thread.Sleep(200);
-            ButtonsClickedByPlayer(chosen, new EventArgs());
+            EnableDisableButtons(true);
+            chosen.PerformClick();
         }
     }
 }
