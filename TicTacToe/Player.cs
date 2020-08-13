@@ -111,6 +111,16 @@ namespace TicTacToe
                 Button btn = EasyDifficulty();
                 return btn;
             }
+            else if (difficulty == 2)
+            {
+                Button btn = MediumDifficulty();
+                return btn;
+            }
+            else if (difficulty == 3)
+            {
+                Button btn = MediumDifficulty();
+                return btn;
+            }
             return null;
         }
 
@@ -139,6 +149,45 @@ namespace TicTacToe
             {
                 return chose;
             }
+            chose = ChoseRandom();
+            return chose;
+        }
+
+        private static Button MediumDifficulty()
+        {
+            Button chose;
+            if (9 - mainGame.remainingButtons.Count > 2)
+            {
+                chose = CheckForPlayer2Win();
+                if (chose != null)
+                {
+                    return chose;
+                }
+                chose = CheckForPlayer1Win();
+                if (chose != null)
+                {
+                    return chose;
+                }
+            }
+            if (9 - mainGame.remainingButtons.Count == 0)
+            {
+                chose = ChoseRandomCorner();
+                return chose;
+            }
+            if (9 - mainGame.remainingButtons.Count == 1)
+            {
+                if (mainGame.B2.Text == mainGame.player1.character)
+                {
+                    chose = ChoseRandomCorner();
+                    return chose;
+                }
+                else
+                {
+                    chose = mainGame.B2;
+                    return chose;
+                }
+            }
+
             chose = ChoseRandom();
             return chose;
         }

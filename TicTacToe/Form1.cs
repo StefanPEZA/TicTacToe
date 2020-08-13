@@ -322,16 +322,20 @@ namespace TicTacToe
             {
                 if (e.KeyCode == Keys.Enter)
                 {
-                    if (nameChange1.Text.Length >= 3)
+                    if (nameChange1.Text.Length >= 3 && nameChange1.Text != player2.name)
                     {
                         player1.name = nameChange1.Text;
                         nameChange1.Enabled = false;
                         nameChange1.Visible = false;
                         Player1Char.Visible = false;
                         UpdateScoreTable();
-                        e.Handled = true;
-                        e.SuppressKeyPress = true;
                     }
+                    else
+                    {
+                        MessageBox.Show("Make sure the name has at least 3 characters, and is not the same as the player2!", "Too short or same names!", MessageBoxButtons.OK);
+                    }
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
                 }
             }
         }
@@ -359,13 +363,17 @@ namespace TicTacToe
             {
                 if (e.KeyCode == Keys.Enter)
                 {
-                    if (nameChange2.Text.Length >= 3)
+                    if (nameChange2.Text.Length >= 3 && nameChange2.Text != player1.name)
                     {
                         player2.name = nameChange2.Text;
                         nameChange2.Enabled = false;
                         nameChange2.Visible = false;
                         Player2Char.Visible = false;
                         UpdateScoreTable();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Make sure the name has at least 3 characters, and is not the same as the player1!", "Too short or same names!", MessageBoxButtons.OK);
                     }
                     e.Handled = true;
                     e.SuppressKeyPress = true;
@@ -436,11 +444,11 @@ namespace TicTacToe
             }
             else if (DifficultyChosen.SelectedItem.ToString() == "Medium")
             {
-                difficulty = 1;
+                difficulty = 2;
             }
             else if (DifficultyChosen.SelectedItem.ToString() == "Hard")
             {
-                difficulty = 1;
+                difficulty = 3;
             }
 
             Button chosen = Player.PerformAiMove(difficulty);
